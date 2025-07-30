@@ -77,7 +77,7 @@
         link.addEventListener('click', () => {
           const query = document.querySelector('input.gsc-input')?.value || '';
           const fullUrl = `${LOGGING_URL}?url=${encodeURIComponent(link.href)}&query=${encodeURIComponent(query)}`;
-          fetch(fullUrl).catch(err => console.error("Logging failed:", err));
+          fetch(fullUrl, { mode: 'no-cors' }).catch(err => console.error("Logging failed:", err));
         });
       }
     });
