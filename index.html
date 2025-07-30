@@ -67,32 +67,30 @@
   <h1>GPT Seeker</h1>
   <div class="gcse-search"></div>
 
-  <script>
-    const LOGGING_URL = "https://script.google.com/macros/s/AKfycbzRWK8kUAaS3LnGQ0yzbj88uaYHlngcWE0C9pyrtUqdn88CWjOWRLvTxHNyEwvlSJOwZw/exec";
+<script>
+  const LOGGING_URL = "https://script.google.com/macros/s/AKfycbzRWK8kUAaS3LnGQ0yzbj88uaYHlngcWE0C9pyrtUqdn88CWjOWRLvTxHNyEwvlSJOwZw/exec";
 
-    const observer = new MutationObserver(() => {
-      document.querySelectorAll('.gsc-webResult a.gs-title').forEach(link => {
-        if (!link.dataset.logged) {
-          link.dataset.logged = "true";
-          link.addEventListener('click', () => {
-            const query = document.querySelector('input.gsc-input')?.value || '';
-            fetch(LOGGING_URL, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                link: link.href,
-                query: query,
-                timestamp: new Date().toISOString()
-              })
-            }).catch(err => console.error("Logging failed:", err));
-          });
-        }
-      });
+  const observer = new MutationObserver(() => {
+    document.querySelectorAll('.gsc-webResult a.gs-title').forEach(link => {
+      if (!link.dataset.logged) {
+        link.dataset.logged = "true";
+        link.addEventListener('click', () => {
+          const encodedUrl = encodeURIComponent(link.href);
+          const body = `url=${encodedUrl}`;
+
+          fetch(LOGGING_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: body
+          }).catch(err => console.error("Logging failed:", err));
+        });
+      }
     });
+  });
 
-    observer.observe(document.body, { childList: true, subtree: true });
-  </script>
+  observer.observe(document.body, { childList: true, subtree: true });
+</script>
 </body>
 </html>
