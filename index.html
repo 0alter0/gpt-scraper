@@ -6,21 +6,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script async src="https://cse.google.com/cse.js?cx=b66cc284fa1734052"></script>
   <style>
+    :root {
+      --gpt-green: #10a37f;
+      --bg-dark: #111;
+      --text-light: #fff;
+      --input-bg: #1a1a1a;
+      --border-color: #333;
+    }
+
     body {
-      background-color: #111;
-      color: white;
-      font-family: sans-serif;
-      padding: 40px;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 60px 20px;
       margin: 0;
       text-align: center;
     }
+
     h1 {
-      font-size: 2em;
-      margin-bottom: 30px;
+      font-size: 3em;
+      margin-bottom: 40px;
+      color: var(--gpt-green);
+      text-shadow: 0 0 10px var(--gpt-green);
     }
+
     .gcse-search {
       max-width: 900px;
       margin: auto;
+      background: var(--input-bg);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(16, 163, 127, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    input.gsc-input {
+      background-color: var(--input-bg) !important;
+      border: 1px solid var(--border-color) !important;
+      color: var(--text-light) !important;
+    }
+
+    input.gsc-input:focus {
+      border-color: var(--gpt-green) !important;
+      box-shadow: 0 0 5px var(--gpt-green);
+    }
+
+    .gsc-search-button-v2 {
+      background-color: var(--gpt-green) !important;
+      border-radius: 8px !important;
+      padding: 6px 14px !important;
+    }
+
+    .gsc-search-button-v2 svg {
+      fill: white !important;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      .gcse-search {
+        padding: 10px;
+      }
     }
   </style>
 </head>
