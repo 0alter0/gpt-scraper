@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChatGPT Share Dork Search</title>
+</head>
+<body style="background-color: #111; color: white; font-family: sans-serif; text-align: center; padding-top: 100px;">
+  <h1>Search Shared ChatGPT Conversations</h1>
+  <input type="text" id="userInput" placeholder="Enter keywords..." style="padding: 10px; width: 300px;">
+  <button onclick="search()" style="padding: 10px 20px; margin-left: 10px;">Search</button>
+
+  <script>
+    function search() {
+      const input = document.getElementById("userInput").value.trim();
+      if (input) {
+        const query = `site:chatgpt.com/share ${input}`;
+        const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        window.open(url, "_blank");
+      }
+    }
+  </script>
+</body>
+</html>
