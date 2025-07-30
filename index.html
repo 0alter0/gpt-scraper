@@ -8,66 +8,75 @@
   <style>
     :root {
       --gpt-green: #10a37f;
-      --bg-dark: #111;
-      --text-light: #fff;
+      --bg-dark: #0d0d0d;
+      --text-light: #e0e0e0;
       --input-bg: #1a1a1a;
-      --border-color: #333;
+      --border: #2a2a2a;
     }
 
     body {
       background-color: var(--bg-dark);
       color: var(--text-light);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
       padding: 60px 20px;
       margin: 0;
       text-align: center;
     }
 
     h1 {
-      font-size: 3em;
-      margin-bottom: 40px;
+      font-size: 2.5em;
       color: var(--gpt-green);
-      text-shadow: 0 0 10px var(--gpt-green);
+      font-weight: 500;
+      margin-bottom: 30px;
     }
 
     .gcse-search {
-      max-width: 900px;
-      margin: auto;
-      background: var(--input-bg);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 15px rgba(16, 163, 127, 0.2);
-      transition: all 0.3s ease;
+      max-width: 720px;
+      margin: 0 auto;
     }
 
     input.gsc-input {
       background-color: var(--input-bg) !important;
-      border: 1px solid var(--border-color) !important;
       color: var(--text-light) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 6px !important;
+      padding: 8px !important;
+      font-size: 1em !important;
     }
 
     input.gsc-input:focus {
+      outline: none !important;
       border-color: var(--gpt-green) !important;
-      box-shadow: 0 0 5px var(--gpt-green);
     }
 
     .gsc-search-button-v2 {
       background-color: var(--gpt-green) !important;
-      border-radius: 8px !important;
-      padding: 6px 14px !important;
+      color: #fff !important;
+      border: none !important;
+      border-radius: 6px !important;
+      padding: 6px 12px !important;
+      margin-left: 8px;
+      cursor: pointer;
     }
 
-    .gsc-search-button-v2 svg {
-      fill: white !important;
+    .gsc-search-button-v2:hover {
+      opacity: 0.9;
+    }
+
+    .gsc-control-cse {
+      background: none !important;
+      color: var(--text-light) !important;
+      border: none !important;
+    }
+
+    .gsc-webResult, .gsc-result {
+      background-color: transparent !important;
+      border: none !important;
     }
 
     @media (max-width: 600px) {
       h1 {
         font-size: 2em;
-      }
-
-      .gcse-search {
-        padding: 10px;
       }
     }
   </style>
