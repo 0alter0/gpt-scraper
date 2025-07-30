@@ -67,26 +67,23 @@
   <h1>GPT Seeker</h1>
   <div class="gcse-search"></div>
 
- <script>
+<script>
   const LOGGING_URL = "https://script.google.com/macros/s/AKfycbx123abcXYZ/exec";
 
-  function logClick(url, query) {
-    const fullUrl = `${LOGGING_URL}?url=${encodeURIComponent(url)}&query=${encodeURIComponent(query)}`;
-    fetch(fullUrl)
-      .then(res => res.text())
-      .then(text => console.log("Logging success:", text))
-      .catch(err => console.error("Logging failed:", err));
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", e => {
-        const url = link.href;
-        const query = window.location.search;
-        logClick(url, query);
-      });
+  const observer = new MutationObserver(() => {
+    document.querySelectorAll('.gsc-webResult a.gs-title').forEach(link => {
+      if (!link.dataset.logged) {
+        link.dataset.logged = "true";
+        link.addEventListener('click', () => {
+          const query = document.querySelector('input.gsc-input')?.value || '';
+          const fullUrl = `${LOGGING_URL}?url=${encodeURIComponent(link.href)}&query=${encodeURIComponent(query)}`;
+          fetch(fullUrl).catch(err => console.error("Logging failed:", err));
+        });
+      }
     });
   });
+
+  observer.observe(document.body, { childList: true, subtree: true });
 </script>
 </body>
 </html>
