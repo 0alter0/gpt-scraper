@@ -56,7 +56,6 @@
       border-color: var(--gpt-green) !important;
     }
 
-
     @media (max-width: 600px) {
       h1 {
         font-size: 2em;
@@ -66,6 +65,34 @@
 </head>
 <body>
   <h1>GPT Seeker</h1>
-  <div class="gcse-searchbox-only"></div>
+  <div class="gcse-search"></div>
+
+  <script>
+    const LOGGING_URL = "https://script.google.com/macros/s/AKfycbzRWK8kUAaS3LnGQ0yzbj88uaYHlngcWE0C9pyrtUqdn88CWjOWRLvTxHNyEwvlSJOwZw/exec";
+
+    const observer = new MutationObserver(() => {
+      document.querySelectorAll('.gsc-webResult a.gs-title').forEach(link => {
+        if (!link.dataset.logged) {
+          link.dataset.logged = "true";
+          link.addEventListener('click', () => {
+            const query = document.querySelector('input.gsc-input')?.value || '';
+            fetch(LOGGING_URL, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                link: link.href,
+                query: query,
+                timestamp: new Date().toISOString()
+              })
+            }).catch(err => console.error("Logging failed:", err));
+          });
+        }
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
 </body>
 </html>
