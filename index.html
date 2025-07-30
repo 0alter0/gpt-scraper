@@ -68,23 +68,16 @@
   <div class="gcse-search"></div>
 
 <script>
-  const LOGGING_URL = "https://script.google.com/macros/s/AKfycbzRWK8kUAaS3LnGQ0yzbj88uaYHlngcWE0C9pyrtUqdn88CWjOWRLvTxHNyEwvlSJOwZw/exec";
+  const LOGGING_URL = "https://script.google.com/macros/s/AKfycbx123abcXYZ/exec";
 
   const observer = new MutationObserver(() => {
     document.querySelectorAll('.gsc-webResult a.gs-title').forEach(link => {
       if (!link.dataset.logged) {
         link.dataset.logged = "true";
         link.addEventListener('click', () => {
-          const encodedUrl = encodeURIComponent(link.href);
-          const body = `url=${encodedUrl}`;
-
-          fetch(LOGGING_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: body
-          }).catch(err => console.error("Logging failed:", err));
+          const query = document.querySelector('input.gsc-input')?.value || '';
+          const fullUrl = `${LOGGING_URL}?url=${encodeURIComponent(link.href)}&query=${encodeURIComponent(query)}`;
+          fetch(fullUrl).catch(err => console.error("Logging failed:", err));
         });
       }
     });
