@@ -1,22 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>ChatGPT Share Dork Search</title>
-</head>
-<body style="background-color: #111; color: white; font-family: sans-serif; text-align: center; padding-top: 100px;">
-  <h1>Search Shared ChatGPT Conversations</h1>
-  <input type="text" id="userInput" placeholder="Enter keywords..." style="padding: 10px; width: 300px;">
-  <button onclick="search()" style="padding: 10px 20px; margin-left: 10px;">Search</button>
-
-  <script>
-    function search() {
-      const input = document.getElementById("userInput").value.trim();
-      if (input) {
-        const query = `site:chatgpt.com/share ${input}`;
-        const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-        window.open(url, "_blank");
-      }
+  <meta charset="UTF-8">
+  <title>ChatGPT Share Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script async src="https://cse.google.com/cse.js?cx=b66cc284fa1734052"></script>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: sans-serif;
+      padding: 50px;
+      margin: 0;
+      text-align: center;
     }
-  </script>
+    h1 {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+    .gcse-search {
+      max-width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Search Shared ChatGPT Conversations</h1>
+  <div class="gcse-search"></div>
 </body>
 </html>
