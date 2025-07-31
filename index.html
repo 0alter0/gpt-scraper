@@ -71,14 +71,14 @@
   const LOGGING_URL = "https://script.google.com/macros/s/AKfycbzRWK8kUAaS3LnGQ0yzbj88uaYHlngcWE0C9pyrtUqdn88CWjOWRLvTxHNyEwvlSJOwZw/exec";
 
   const observer = new MutationObserver(() => {
-    document.querySelectorAll('.gsc-webResult a.gs-title').forEach(link => {
-      if (!link.dataset.logged) {
+    document.querySelectorAll('a[href^="https://chatgpt.com/share/"]').forEach(link => {
+      const url = link.href;
+      if (!link.dataset.logged && /^https:\/\/chatgpt\.com\/share\/[a-zA-Z0-9\-]+$/.test(url)) {
         link.dataset.logged = "true";
-        link.addEventListener('click', () => {
-          const query = document.querySelector('input.gsc-input')?.value || '';
-          const fullUrl = `${LOGGING_URL}?url=${encodeURIComponent(link.href)}&query=${encodeURIComponent(query)}`;
-          fetch(fullUrl, { mode: 'no-cors' }).catch(err => console.error("Logging failed:", err));
-        });
+
+        fetch(LOGGING_URL + "?url=" + encodeURIComponent(url) + "&title=" + encodeURIComponent(link.textContent || url), {
+          mode: 'no-cors'
+        }).catch(err => console.error("Logging failed:", err));
       }
     });
   });
